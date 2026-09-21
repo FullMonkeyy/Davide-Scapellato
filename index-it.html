@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio personale di Davide Scapellato - Sviluppatore Software, Specialista AI/LLM e studente BSc in Informatica all'USI. Competenze in Algoritmi, Sviluppo Fullstack e Cloud Computing.">
+    <title>Davide Scapellato | Portfolio AI & Sviluppatore Software</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="Developerstyle.css">
+</head>
+<body>
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <header class="glass-nav">
+        <div class="nav-container">
+            <div class="logo">DS<span>.</span></div>
+            <button class="mobile-menu-btn" aria-label="Apri menu di navigazione" aria-expanded="false" aria-controls="main-nav">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="main-nav" class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">Profilo</a></li>
+                    <li><a href="#experience">Esperienza</a></li>
+                    <li><a href="#education">Formazione</a></li>
+                    <li><a href="#projects">Progetti</a></li>
+                    <li><a href="#news">Notizie</a></li>
+                    <li><a href="index.html" class="lang-switch" aria-label="Passa all'Inglese">EN</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section" aria-label="Presentazione Principale">
+            <div class="hero-content fade-in">
+                <!-- IMMAGINE DEL PROFILO CIRCOLARE (Hero) -->
+                <img src="Photo/la-tua-foto.jpg" alt="Foto di Davide Scapellato" class="profile-pic" id="hero-profile-pic" tabindex="0" role="button" aria-label="Ingrandisci foto">
+                
+                <p class="greeting">Benvenuto, sono</p>
+                <h1 class="main-title">Davide Scapellato</h1>
+                <h2 class="subtitle">Studente BSc in Informatica @ USI | Sviluppatore AI & Fullstack</h2>
+                <p class="hero-desc">
+                    Appassionato di ingegneria del software e dello sviluppo di soluzioni digitali complesse. Costruisco architetture moderne combinando rigorosi principi accademici con l'applicazione pratica, dallo sviluppo Fullstack e Cloud Computing, fino al Machine Learning, Large Language Models (LLMs) e Algoritmi altamente ottimizzati.
+                </p>
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary" aria-label="Vai ai progetti">Esplora i Miei Progetti</a>
+                    <a href="#contact" class="btn btn-secondary" aria-label="Vai ai contatti">Mettiamoci in Contatto</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/FullMonkeyy" target="_blank" rel="noopener noreferrer" aria-label="Profilo GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:scapellatodavide552@gmail.com" aria-label="Invia un'email a Davide"><i class="fas fa-envelope"></i></a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="Profilo LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section-container" aria-labelledby="about-title">
+            <h2 id="about-title" class="section-title fade-in">Profilo & Competenze</h2>
+            <div class="about-grid">
+                
+                <!-- CARD PROFILO DIAGONALE -->
+                <article class="glass-card fade-in diagonal-card">
+                    <div class="diagonal-image-wrapper-left">
+                        <img src="Photo/la-tua-foto.jpg" alt="Ritratto di Davide Scapellato">
+                    </div>
+                    <div class="diagonal-content-right">
+                        <div class="card-header" style="margin-bottom: 1rem;">
+                            <i class="fas fa-user-astronaut text-accent icon-large"></i>
+                            <h3>Il Mio Background</h3>
+                        </div>
+                        <p>
+                            Con un solido background tecnico e un Diploma in Informatica conseguito con il massimo dei voti (<strong>100/100</strong>), il mio focus è fortemente orientato verso l'<strong>Intelligenza Artificiale</strong>, le <strong>Strutture Dati</strong> e le moderne <strong>architetture Cloud</strong>.
+                        </p>
+                        <p>
+                            Il mio obiettivo è tradurre la conoscenza accademica in soluzioni software tangibili, applicando logica algoritmica avanzata e paradigmi di ML a sfide del mondo reale su tutto lo stack.
+                        </p>
+                        <ul class="personal-info-list mt-4">
+                            <li><strong>Età:</strong> Nato nel 2006 (15/02/2006)</li>
+                            <li><strong>Nazionalità:</strong> Italiana</li>
+                            <li><strong>Mobilità:</strong> Patente Categoria B</li>
+                            <li><strong>Posizione:</strong> Porto Ceresio (VA), IT / Ticino, CH</li>
+                            <li><strong>Lingue:</strong> Italiano (Madrelingua), Inglese (Fluente)</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- CARD COMPETENZE -->
+                <article class="glass-card fade-in full-width-card">
+                    <div class="card-header">
+                        <i class="fas fa-laptop-code text-accent icon-large"></i>
+                        <h3>Tech Stack & Competenze</h3>
+                    </div>
+                    
+                    <div class="skills-category">
+                        <h4>Linguaggi di Programmazione & Database</h4>
+                        <div class="skills-container">
+                            <div class="skill-tag">C</div>
+                            <div class="skill-tag">C#</div>
+                            <div class="skill-tag">Java</div>
+                            <div class="skill-tag">Python</div>
+                            <div class="skill-tag">PHP</div>
+                            <div class="skill-tag">JavaScript</div>
+                            <div class="skill-tag outline" style="border-color: var(--accent-color); color: var(--text-primary);">SQL (Avanzato)</div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category mt-4">
+                        <h4>AI & Strutture Dati (Core)</h4>
+                        <div class="skills-container">
+                            <div class="skill-tag">Algoritmi & Strutture Dati</div>
+                            <div class="skill-tag">Machine Learning</div>
+                            <div class="skill-tag">Large Language Models (LLMs)</div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category mt-4">
+                        <h4>Architettura & Cloud</h4>
+                        <div class="skills-container">
+                            <div class="skill-tag">Sviluppo Fullstack</div>
+                            <div class="skill-tag">Cloud Computing</div>
+                            <div class="skill-tag">ASP.NET & Entity Framework</div>
+                            <div class="skill-tag">Software Design</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="experience" class="section-container" aria-labelledby="experience-title">
+            <h2 id="experience-title" class="section-title fade-in">Esperienza Professionale</h2>
+            <div class="timeline">
+                <div class="timeline-item glass-card fade-in">
+                    <div class="timeline-date">Luglio 2026 - Presente</div>
+                    <h3 class="timeline-role">Operatore Chat & Supporto</h3>
+                    <h4 class="timeline-company">Enter Talk Pro</h4>
+                    <p>Sviluppo di eccellenti capacità relazionali in ambienti ad alta pressione. Ottimizzazione dei tempi di risposta tramite digitazione rapida e gestione dinamica delle interazioni degli utenti.</p>
+                </div>
+                
+                <div class="timeline-item glass-card fade-in">
+                    <div class="timeline-date">Dicembre 2025 - Aprile 2026</div>
+                    <h3 class="timeline-role">Tutor Accademico (Part-Time)</h3>
+                    <h4 class="timeline-company">Indipendente, Varese</h4>
+                    <p>Tutoraggio personalizzato per studenti delle scuole superiori. Sviluppo di percorsi logici per superare ostacoli accademici, dimostrando la capacità di insegnare il pensiero algoritmico.</p>
+                </div>
+
+                <div class="timeline-item glass-card fade-in border-accent">
+                    <div class="timeline-date">Marzo 2025 - Aprile 2025</div>
+                    <h3 class="timeline-role">Tirocinio in Sviluppo di Applicazioni Web</h3>
+                    <h4 class="timeline-company">Reti S.p.A., Busto Arsizio (VA)</h4>
+                    <p>Esperienza pratica nel dipartimento di ingegneria del software. Contributo alla logica backend per applicazioni enterprise. Implementazione strutturale tramite <strong>ASP.NET</strong> e mappatura del database utilizzando <strong>Entity Framework Core in C#</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section-container" aria-labelledby="education-title">
+            <h2 id="education-title" class="section-title fade-in">Formazione & Percorso Accademico</h2>
+            
+            <div class="edu-main-grid">
+                <!-- CARD GRANDE DEDICATA ALL'USI -->
+                <article class="glass-card edu-card usi-feature-card highlight fade-in">
+                    <div class="usi-image-wrapper">
+                        <img src="Photo/USI_Facolty_of_Informatics.jpg" alt="Campus Università della Svizzera Italiana (USI)">
+                        <div class="usi-badge">BSc in Informatica</div>
+                    </div>
+                    <div class="usi-content">
+                        <div class="edu-header-inline">
+                            <i class="fas fa-university text-accent icon-large"></i>
+                            <div>
+                                <h3>Università della Svizzera Italiana (USI)</h3>
+                                <h4>Facoltà di Informatica - Lugano, CH</h4>
+                            </div>
+                        </div>
+                        <span class="date">Settembre 2025 - Presente</span>
+                        <p style="margin-top: 1rem;">
+                            Sto conseguendo la laurea triennale in un centro di eccellenza per l'informatica riconosciuto a livello internazionale. Il curriculum all'USI è interamente in lingua inglese e si distingue per il suo <strong>approccio innovativo basato su progetti</strong>.
+                        </p>
+                        <p style="margin-top: 0.8rem; color: var(--text-secondary);">
+                            Attraverso i "Software Ateliers", intensivi e orientati al lavoro di squadra, mi viene richiesto di colmare il divario tra i principi teorici astratti — come algoritmi avanzati, matematica discreta e architetture di sistemi complessi — e l'ingegneria del software del mondo reale. Questo ambiente immersivo completa perfettamente il mio profondo interesse per i modelli di Machine Learning e le strutture di Intelligenza Artificiale.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- CARD DIPLOMA -->
+                <article class="glass-card fade-in diagonal-card">
+                    <div class="diagonal-image-wrapper-left">
+                        <img src="Photo/keynes.png" alt="ISIS J.M. Keynes">
+                    </div>
+                    <div class="diagonal-content-right">
+                        <div class="edu-header-inline">
+                            <i class="fas fa-graduation-cap text-accent icon-large"></i>
+                            <div>
+                                <h3>Diploma Tecnico in Informatica</h3>
+                                <h4>ISIS J.M. Keynes - Gazzada Schianno (VA)</h4>
+                            </div>
+                        </div>
+                        <span class="date">Set 2020 - Giu 2025</span>
+                        <p style="margin-top: 1rem;">
+                            Voto di maturità: <strong>100/100</strong>. Acquisizione metodologica in programmazione orientata agli oggetti, sistemi operativi e progettazione di reti. Ruolo attivo come Rappresentante degli Studenti nel Consiglio d'Istituto (2024-2025).
+                        </p>
+                    </div>
+                </article>
+            </div>
+
+            <h3 class="sub-section-title fade-in mt-6 text-center">Corsi di Specializzazione</h3>
+            <div class="cert-grid mt-4">
+                <div class="glass-card cert-card fade-in text-center">
+                    <i class="fas fa-brain text-accent icon-large mb-2"></i>
+                    <h4>AI e Serie Storiche</h4>
+                    <p>Policollege, Politecnico di Milano</p>
+                    <span class="date">Ott 2024 - Nov 2024</span>
+                </div>
+                <div class="glass-card cert-card fade-in text-center">
+                    <i class="fab fa-android text-accent icon-large mb-2"></i>
+                    <h4>Sviluppo App Android</h4>
+                    <p>J.M. Keynes</p>
+                    <span class="date">Feb 2023 - Mag 2023</span>
+                </div>
+                <div class="glass-card cert-card fade-in text-center">
+                    <i class="fas fa-language text-accent icon-large mb-2"></i>
+                    <h4>Certificato Cambridge First (B2)</h4>
+                    <p>Università di Cambridge</p>
+                    <span class="date">Ottenuto Ott 2023</span>
+                </div>
+            </div>
+        </section>
+
+         <section id="projects" class="section-container" aria-labelledby="projects-title">
+            <h2 id="projects-title" class="section-title fade-in">Progetti GitHub & Esperimenti</h2>
+            <p class="section-desc fade-in text-center mx-auto" style="max-width: 600px; color: var(--text-secondary); margin-bottom: 3rem;">
+                Una selezione delle mie repository pubbliche open-source che dimostrano le mie competenze in AI, Machine Learning, architetture Fullstack e pura logica algoritmica.
+            </p>
+            
+            <div class="projects-grid">
+                
+                <!-- PROGETTO IN PRIMO PIANO: OBD.IA -->
+                <article class="glass-card project-card fade-in" style="grid-column: 1 / -1; display: flex; flex-direction: row; flex-wrap: wrap; padding: 0;">
+                    <div class="project-image" style="flex: 1; min-width: 300px; height: auto; min-height: 280px; border-bottom: none; border-right: 1px solid var(--glass-border);">
+                        <img src="Photo/OBDIA.jpg" alt="Telemetria Automobilistica OBD.IA" style="height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-content" style="flex: 1.5; padding: 3rem;">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.6rem;">OBD.IA - Telemetria Automobilistica Avanzata</h3>
+                        
+                        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
+                            <div style="background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.3);">
+                                <i class="fas fa-fire"></i> Sviluppato a 20 anni
+                            </div>
+                            <div style="background: rgba(148, 163, 184, 0.1); color: var(--text-secondary); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; border: 1px solid var(--glass-border);">
+                                <i class="fas fa-calendar-alt"></i> Agosto 2026
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 0; font-size: 1.05rem; line-height: 1.7;">
+                            Un'ambiziosa piattaforma indipendente di telemetria automobilistica che si connette tramite uno <strong>scanner OBD2</strong> per elaborare i dati dei sensori del veicolo in tempo reale. 
+                            L'ecosistema presenta un'<strong>app iOS proprietaria</strong> che comunica con un backend robusto, archiviando i dati in modo sicuro tramite <strong>bucket Cloudflare</strong>. 
+                            Un'innovazione fondamentale è la sua <strong>pipeline multithreading in Python</strong>, che gestisce senza interruzioni la sintesi vocale e i flussi di risposta intelligenti. 
+                            Inoltre, l'applicazione integra <strong>mappe interattive</strong> per tracciare e analizzare con precisione i percorsi effettuati dal veicolo.
+                        </p>
+                        
+                        <div class="project-tech" style="margin-bottom: 2rem;">
+                            <span>Python</span> <span>Swift (iOS)</span> <span>Node.js</span> <span>Express.js</span> <span>JavaScript</span> <span>SQL</span> <span>HTML/CSS</span>
+                        </div>
+                        
+                        <a href="#projects" class="btn btn-sm btn-outline" style="opacity: 0.6; cursor: not-allowed; pointer-events: none; width: fit-content;" aria-label="Non ancora rilasciato">
+                            <i class="fas fa-lock mr-1" style="margin-right: 8px;"></i> Non ancora rilasciato
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 2: Vanessa Gemini AI -->
+                <article class="glass-card project-card fade-in">
+                    <div class="project-image">
+                        <img src="Photo/VGemini.jpg" alt="Assistente AI Vanessa Gemini">
+                    </div>
+                    <div class="project-content">
+                        <h3 style="margin-bottom: 0.3rem;">Vanessa - Assistente AI Gemini</h3>
+                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
+                            <i class="fas fa-fire"></i> Sviluppato a 18 anni
+                        </div>
+                        <p style="margin-top: 0;">Un'applicazione intelligente di Assistente AI alimentata dall'LLM Gemini di Google. Sviluppata per esplorare integrazioni di API, prompt engineering e parsing intelligente delle risposte all'interno di una robusta applicazione C#.</p>
+                        <div class="project-tech">
+                            <span>C#</span> <span>Python</span>  <span>Gemini AI</span> <span>LLM</span> <span>API</span> <span>PIPE</span> <span>AWS</span> 
+                        </div>
+                        <a href="https://github.com/FullMonkeyy/Vanessa-Gemini-AI-Assistant" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="Visualizza repository Vanessa-Gemini-AI">
+                            Repository <i class="fab fa-github ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 1: Regressore ML -->
+                <article class="glass-card project-card fade-in">
+                    <div class="project-image">
+                        <img src="Photo/ML_Regression.jpg" alt="Regressore Lineare e Sinusoidale ML">
+                    </div>
+                    <div class="project-content">
+                        <h3 style="margin-bottom: 0.3rem;">Regressore Lineare e Sinusoidale ML</h3>
+                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
+                            <i class="fas fa-fire"></i> Sviluppato a 17 anni
+                        </div>
+                        <p style="margin-top: 0;">Un'implementazione a basso livello di un modello regressore lineare di Machine Learning combinato con un'onda sinusoidale. Costruito interamente per dimostrare una profonda comprensione matematica senza fare affidamento su librerie Python di alto livello.</p>
+                        <div class="project-tech">
+                            <span>C</span> <span>C++</span> <span>Machine Learning</span> <span>Matematica</span>
+                        </div>
+                        <a href="https://github.com/FullMonkeyy/SineLinear-Regressor-C" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="Visualizza repository SineLinear-Regressor-C">
+                            Repository <i class="fab fa-github ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 3: VMETA SCUOLA -->
+                <article class="glass-card project-card fade-in">
+                    <div class="project-image">
+                        <img src="Photo/VMeta.jpg" alt="VMETA Scuola">
+                    </div>
+                    <div class="project-content">
+                        <h3 style="margin-bottom: 0.3rem;">VMETA Scuola</h3>
+                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
+                            <i class="fas fa-fire"></i> Sviluppato a 18 anni
+                        </div>
+                        <p style="margin-top: 0;">Un sistema di gestione con Intelligenza Artificiale progettato specificamente per gli studenti. Costruito con C# per fornire un'interfaccia intelligente per la gestione didattica e il trattamento dei dati.</p>
+                        <div class="project-tech">
+                            <span>C#</span> <span>Python</span> <span>ASP.NET Core</span>  <span>HTML/CSS</span> <span>Javascript</span>  <span>AI</span> <span>Telegram Bot</span>  <span>Gestionale</span> 
+                        </div>
+                        <a href="https://github.com/FullMonkeyy/VMETA_SCUOLA" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="Visualizza repository VMETA">
+                            Repository <i class="fab fa-github ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+           
+                <!-- PROGETTO 4: ASP.NET Enterprise -->
+                <article class="glass-card project-card fade-in">
+                    <div class="project-image">
+                        <img src="Photo/MS_Book.jpg" alt="Gestione Libri Enterprise">
+                    </div>
+                    <div class="project-content">
+                        <h3 style="margin-bottom: 0.3rem;">Gestione Libri Enterprise</h3>
+                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
+                            <i class="fas fa-fire"></i> Sviluppato a 18 anni
+                        </div>
+                        <p style="margin-top: 0;">Un'applicazione web RESTful in ASP.NET sviluppata durante il mio tirocinio presso Reti S.p.A. Mostra un'architettura backend moderna, gestione di database relazionali ed endpoint API robusti.</p>
+                        <div class="project-tech">
+                            <span>C#</span> <span>HTML/CSS</span> <span>ASP.NET Core</span> <span>REST API</span> <span>JavaScript</span>
+                        </div>
+                        <a href="https://github.com/FullMonkeyy/MicrosoftBooks-WebApplicationProject" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="Visualizza repository ASP.NET">
+                            Repository <i class="fab fa-github ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 5: WHATSAPP CLONE -->
+                <article class="glass-card project-card fade-in">
+                    <div class="project-image">
+                        <img src="Photo/WhatsappTCP.jpg" alt="Emulatore WhatsApp WPF">
+                    </div>
+                    <div class="project-content">
+                        <h3 style="margin-bottom: 0.3rem;">Emulatore WhatsApp WPF</h3>
+                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
+                            <i class="fas fa-fire"></i> Sviluppato a 18 anni
+                        </div>
+                        <p style="margin-top: 0;">Un'applicazione desktop Windows Presentation Foundation (WPF) costruita in C# che emula fedelmente l'interfaccia grafica e le funzionalità principali della messaggistica di WhatsApp.</p>
+                        <div class="project-tech">
+                            <span>C#</span> <span>WPF</span> <span>Desktop App</span> <span>UI/UX</span>
+                        </div>
+                        <a href="https://github.com/FullMonkeyy/WHATTSAPP" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="Visualizza repository WHATSAPP">
+                            Repository <i class="fab fa-github ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 6: Gioco Vanilla JS -->
+                <article class="glass-card project-card fade-in">
+                    <div class="project-image">
+                        <img src="Photo/Supermario.jpg" alt="Vanilla JS Super Mario">
+                    </div>
+                    <div class="project-content">
+                        <h3 style="margin-bottom: 0.3rem;">Vanilla JS Super Mario</h3>
+                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
+                            <i class="fas fa-fire"></i> Sviluppato a 17 anni
+                        </div>
+                        <p style="margin-top: 0;">Un gioco web di Super Mario completamente giocabile sviluppato interamente da zero. Presenta fisica personalizzata, algoritmi di rilevamento delle collisioni e manipolazione interattiva del DOM utilizzando puro JavaScript.</p>
+                        <div class="project-tech">
+                            <span>JavaScript</span> <span>HTML/CSS</span> <span>Algoritmi</span>
+                        </div>
+                        <a href="https://github.com/FullMonkeyy/Super-Mario-Web-Game" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="Visualizza repository Super Mario">
+                            Gioca & Codice <i class="fab fa-github ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- SEZIONE PREMI E NOTIZIE -->
+        <section id="news" class="section-container" aria-labelledby="news-title">
+            <h2 id="news-title" class="section-title fade-in">Premi & Notizie in Evidenza</h2>
+            <p class="section-desc fade-in text-center mx-auto" style="max-width: 600px; color: var(--text-secondary); margin-bottom: 3rem;">
+                Una collezione dei miei riconoscimenti accademici, progetti in evidenza e presenze sui media.
+            </p>
+            
+            <div class="projects-grid">
+                
+                <!-- NOTIZIA 1: Confindustria 2025 -->
+                <article class="glass-card project-card fade-in">
+                    <div class="project-image">
+                        <img src="Photo/confphoto.png" alt="Premio Borsa di Studio Confindustria">
+                    </div>
+                    <div class="project-content">
+                        <h3 style="margin-bottom: 0.5rem;">Premio Borsa di Studio Confindustria</h3>
+                        
+                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
+                            <i class="fas fa-award"></i> Premio 2025
+                        </div>
+                        
+                        <p style="margin-top: 0; flex-grow: 1;">Insignito di una prestigiosa borsa di studio da Confindustria in riconoscimento dell'eccellenza accademica, del potenziale tecnico e della dedizione nel campo dell'informatica.</p>
+                        
+                        <a href="https://www.confindustriavarese.it/web_v4/site.nsf/dx/Generazione-d%E2%80%99Industria-l%E2%80%99investimento-nella-cultura-d%E2%80%99impresa-tra-i-giovani-arriva-a-sfiorare-1-milione-di-euro" class="btn btn-sm btn-outline" style="width: fit-content;" aria-label="Leggi l'articolo">
+                             Vedi l'articolo <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- NOTIZIA 2: Smart Drone 2024 -->
+                <article class="glass-card project-card fade-in">
+                    <div class="project-image">
+                        <img src="Photo/innophoto.png" alt="Progetto Smart Drone AI">
+                    </div>
+                    <div class="project-content">
+                        <h3 style="margin-bottom: 0.5rem;">Progettazione AI per Smart Drone</h3>
+                        
+                        <div style="display: inline-block; background: rgba(148, 163, 184, 0.1); color: var(--text-secondary); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 1rem; border: 1px solid var(--glass-border); width: fit-content;">
+                            <i class="fas fa-robot"></i> Progetto 2024 in Evidenza
+                        </div>
+                        
+                        <p style="margin-top: 0; flex-grow: 1;">Ho partecipato alla progettazione e ingegnerizzazione di un drone intelligente, assumendo la responsabilità del modulo di Intelligenza Artificiale. Ho sviluppato e integrato un affidabile sistema di riconoscimento facciale per l'autenticazione sicura degli utenti.</p>
+                        
+                        <a href="https://www.isiskeynes.edu.it/pagine/leonardo-e-galileo-mai-cos-vicini" class="btn btn-sm btn-outline" style="width: fit-content;" aria-label="Leggi l'articolo">
+                           Vedi l'articolo <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- NOTIZIA 3: Policollege 2023 -->
+                <article class="glass-card project-card fade-in">
+                    <div class="project-image">
+                        <img src="Photo/artificial-intelligence-g895db704d_1280jpg.jpg" alt="Selezione Policollege AI">
+                    </div>
+                    <div class="project-content">
+                        <h3 style="margin-bottom: 0.5rem;">Policollege - Politecnico di Milano</h3>
+                        
+                        <div style="display: inline-block; background: rgba(148, 163, 184, 0.1); color: var(--text-secondary); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 1rem; border: 1px solid var(--glass-border); width: fit-content;">
+                            <i class="fas fa-university"></i> Selezione Accademica 2023
+                        </div>
+                        
+                        <p style="margin-top: 0; flex-grow: 1;">Vincitore del rigoroso processo di selezione per partecipare all'esclusiva serie di webinar Policollege ospitata dal Politecnico di Milano, incentrata su concetti avanzati di Intelligenza Artificiale e analisi delle serie storiche.</p>
+                        
+                        <a href="https://www.policollege.polimi.it/2023/05/16/intelligenza-artificiale-e-serie-temporali-scopri-come-predire-il-futuro-grazie-allai/" class="btn btn-sm btn-outline" style="width: fit-content;" aria-label="Leggi l'articolo">
+                            Vedi l'articolo <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+        
+    </main>
+
+    <footer id="contact" class="glass-footer">
+        <div class="footer-content fade-in">
+            <h2 class="mb-2">Aperto a Nuove Sfide</h2>
+            <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 2rem;">
+                Attualmente alla ricerca di opportunità di lavoro part-time o esperienze pre-laurea in ruoli di Ingegneria del Software, Fullstack o AI da affiancare ai miei studi all'USI.
+            </p>
+            <div class="contact-methods">
+                <a href="tel:+393203440031" aria-label="Chiama Davide"><i class="fas fa-phone-alt"></i> +39 3203440031</a>
+                <a href="mailto:scapellatodavide552@gmail.com" aria-label="Invia email"><i class="fas fa-paper-plane"></i> scapellatodavide552@gmail.com</a>
+                <span style="color: var(--text-secondary);"><i class="fas fa-map-marker-alt"></i> Via Roberto Ticli 6, 21050 Porto Ceresio (VA), Italia</span>
+            </div>
+            
+            <div class="footer-bottom mt-6">
+                <p>&copy; 2026 Davide Scapellato. Architettura & Sviluppo Web Indipendente.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="image-modal" class="image-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Foto profilo ingrandita">
+        <button class="close-modal-btn" aria-label="Chiudi visualizzazione ingrandita">&times;</button>
+        <img class="modal-content" id="modal-img" alt="Davide Scapellato ingrandito">
+    </div>
+
+    <script src="Developerscript.js"></script>
+</body>
+</html>
