@@ -84,6 +84,7 @@
                             <li><strong>Nationality:</strong> Italian</li>
                             <li><strong>Mobility:</strong> Driving License Category B</li>
                             <li><strong>Location:</strong> Porto Ceresio (VA), IT / Ticino, CH</li>
+                            <li><strong>Language:</strong> Italian, English (Completely fluent)</li>
                         </ul>
                     </div>
                 </article>
@@ -236,25 +237,40 @@
             
             <div class="projects-grid">
                 
-                <article class="glass-card project-card fade-in" style="grid-column: 1 / -1; display: flex; flex-direction: row; flex-wrap: wrap; padding: 0;">
-                    <div class="project-image" style="flex: 1; min-width: 300px; height: auto; min-height: 280px; border-bottom: none; border-right: 1px solid var(--glass-border);">
-                        <!-- Sostituisci il src con il percorso reale dell'immagine di OBD.IA -->
-                        <img src=" Photo/OBDIA.jpg" alt="OBD.IA Automotive Telemetry" style="height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="project-content" style="flex: 1.5; padding: 3rem;">
-                        <h3 style="margin-bottom: 0.3rem;">OBD.IA - Automotive Telemetry Platform</h3>
-                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
+                <!-- PROGETTO IN PRIMO PIANO: OBD.IA (Card Orizzontale) -->
+            <article class="glass-card project-card fade-in" style="grid-column: 1 / -1; display: flex; flex-direction: row; flex-wrap: wrap; padding: 0;">
+                <div class="project-image" style="flex: 1; min-width: 300px; height: auto; min-height: 280px; border-bottom: none; border-right: 1px solid var(--glass-border);">
+                    <img src=" Photo/OBDIA.jpg" alt="OBD.IA Automotive Telemetry" style="height: 100%; object-fit: cover;">
+                </div>
+                <div class="project-content" style="flex: 1.5; padding: 3rem;">
+                    <h3 style="margin-bottom: 0.5rem; font-size: 1.6rem;">OBD.IA - Advanced Automotive Telemetry</h3>
+                    
+                    <!-- Contenitore Badge -->
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
+                        <div style="background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.3);">
                             <i class="fas fa-fire"></i> Developed at 20
                         </div>
-                        <p style="margin-top: 0; font-size: 1.05rem;">An independent automotive telemetry web and mobile application designed to process vehicle sensor data. It acts as a real-time driver analytics platform, integrating complex custom database architectures and interactive map assets to provide deep insights into vehicle performance.</p>
-                        <div class="project-tech">
-                            <span>Python</span> <span>SQL</span> <span>Web/Mobile</span> <span>Data Analytics</span> <span>Telemetry</span>
+                        <div style="background: rgba(148, 163, 184, 0.1); color: var(--text-secondary); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; border: 1px solid var(--glass-border);">
+                            <i class="fas fa-calendar-alt"></i> August 2026
                         </div>
-                        <a href="#projects" class="btn btn-sm btn-outline" style="opacity: 0.6; cursor: not-allowed; pointer-events: none;" aria-label="Not released yet">
-                            <i class="fas fa-lock mr-1" style="margin-right: 15px;"></i> Not released yet
-                        </a>
                     </div>
-                </article>
+
+                    <p style="margin-top: 0; font-size: 1.05rem; line-height: 1.7;">
+                        An ambitious, independent automotive telemetry platform that connects via an <strong>OBD2 scanner</strong> to process real-time vehicle sensor data. 
+                        The ecosystem features a <strong>proprietary iOS app</strong> communicating with a robust backend, securely storing data via <strong>Cloudflare buckets</strong>. 
+                        A core innovation is its <strong>Python multithreading pipeline</strong>, which seamlessly manages voice synthesis and intelligent response flows. 
+                        Furthermore, the application integrates <strong>interactive maps</strong> to precisely track and analyze the routes taken by the vehicle.
+                    </p>
+                    
+                    <div class="project-tech" style="margin-bottom: 2rem;">
+                        <span>Python</span> <span>Swift (iOS)</span> <span>Node.js</span> <span>Express.js</span> <span>JavaScript</span> <span>SQL</span> <span>HTML/CSS</span>
+                    </div>
+                    
+                    <a href="#projects" class="btn btn-sm btn-outline" style="opacity: 0.6; cursor: not-allowed; pointer-events: none; width: fit-content;" aria-label="Not released yet">
+                        <i class="fas fa-lock mr-1" style="margin-right: 8px;"></i> Not released yet
+                    </a>
+                </div>
+            </article>
 
                 <!-- PROGETTO 1: Machine Learning (C/C++) -->
                 
