@@ -410,7 +410,7 @@ html:not(.js) .statement .w { opacity: 1; }
 .ulink::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
 .ulink:hover::after { transform: scaleX(1); transform-origin: left; }
 .contact__bottom { display: flex; justify-content: space-between; gap: 1rem; margin-top: clamp(64px, 8vw, 120px); color: var(--muted); }
-.contact__giant { font-size: 24vw; line-height: .75; letter-spacing: -0.04em; color: transparent; -webkit-text-stroke: 1.5px rgba(236, 232, 225, .5); background: linear-gradient(to bottom, rgba(236, 232, 225, .22), rgba(236, 232, 225, .03) 85%); -webkit-background-clip: text; background-clip: text; text-align: center; margin: 40px calc(var(--gutter) * -1) calc(var(--gutter) * -1 - 3vw); white-space: nowrap; user-select: none; }
+.contact__giant { font-size: 24vw; line-height: .95; padding-bottom: .04em; letter-spacing: -0.04em; color: transparent; -webkit-text-stroke: 1.5px rgba(236, 232, 225, .5); background: linear-gradient(to bottom, rgba(236, 232, 225, .24), rgba(236, 232, 225, .08)); -webkit-background-clip: text; background-clip: text; text-align: center; margin: 40px calc(var(--gutter) * -1) 0; white-space: nowrap; user-select: none; }
 
 /* ---------- Palette ---------- */
 .palette { position: fixed; inset: 0; z-index: 150; background: rgba(11, 11, 10, .6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: grid; place-items: start center; padding: 16vh 16px 16px; }

@@ -184,6 +184,39 @@ async function intro() {
 function setupScroll() {
   if (!hasGsap) return;
 
+  // Horizontal project gallery — created FIRST: ScrollTrigger computes positions in creation
+  // order, so every trigger made after this one accounts for the pin's extra scroll length.
+  const mm = gsap.matchMedia();
+  if (!reducedMotion) mm.add('(min-width: 901px)', () => {
+    const track = $('.work__track');
+    const pin = $('.work__pin');
+    const cards = $$('.card', track);
+    const bar = $('.work__bar span');
+    const distance = () => track.scrollWidth - (window.innerWidth - track.getBoundingClientRect().left + gsap.getProperty(track, 'x'));
+    const tween = gsap.to(track, {
+      x: () => -Math.max(0, distance()),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: pin, pin: true, scrub: true, start: 'top top',
+        end: () => '+=' + Math.max(1, distance()),
+        invalidateOnRefresh: true,
+        onUpdate: (self) => { bar.style.transform = `scaleX(${self.progress})`; },
+      },
+    });
+    // Images drift inside their frames as the track moves — maps 1:1 to scroll, no extra smoothing.
+    const imgs = cards.map((c) => $('.card__media img', c)).filter(Boolean);
+    cards.forEach((c) => {
+      const img = $('.card__media img', c);
+      if (!img) return;
+      ScrollTrigger.create({
+        trigger: c, containerAnimation: tween, start: 'left right', end: 'right left',
+        onUpdate: (self) => { img.style.translate = `${(self.progress - 0.5) * -12}% 0`; },
+      });
+    });
+    return () => { gsap.set(track, { x: 0 }); imgs.forEach((img) => { img.style.translate = ''; }); };
+  });
+
+
   // Scene morph follows whichever section owns the middle of the viewport.
   $$('[data-shape]').forEach((sec) => {
     ScrollTrigger.create({
@@ -265,7 +298,8 @@ function setupScroll() {
   gsap.fromTo('.usi__media img', { yPercent: -8 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '.usi', start: 'top bottom', end: 'bottom top', scrub: true } });
 
   // Contact outline word slides in.
-  gsap.from('.contact__giant', { yPercent: 60, ease: 'none', scrollTrigger: { trigger: '.contact__giant', start: 'top bottom', end: 'bottom bottom', scrub: true } });
+  // Ends at the page's max scroll so the word is always fully in place at the very bottom.
+  gsap.from('.contact__giant', { yPercent: 40, ease: 'none', scrollTrigger: { trigger: '.contact__giant', start: 'top bottom', end: 'max', scrub: true } });
 
   // Counters.
   $$('[data-count]').forEach((el) => {
@@ -278,36 +312,6 @@ function setupScroll() {
     });
   });
 
-  // Horizontal project gallery.
-  const mm = gsap.matchMedia();
-  mm.add('(min-width: 901px)', () => {
-    const track = $('.work__track');
-    const pin = $('.work__pin');
-    const cards = $$('.card', track);
-    const bar = $('.work__bar span');
-    const distance = () => track.scrollWidth - (window.innerWidth - track.getBoundingClientRect().left + gsap.getProperty(track, 'x'));
-    const tween = gsap.to(track, {
-      x: () => -Math.max(0, distance()),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: pin, pin: true, scrub: true, start: 'top top',
-        end: () => '+=' + Math.max(1, distance()),
-        invalidateOnRefresh: true,
-        onUpdate: (self) => { bar.style.transform = `scaleX(${self.progress})`; },
-      },
-    });
-    // Images drift inside their frames as the track moves — maps 1:1 to scroll, no extra smoothing.
-    const imgs = cards.map((c) => $('.card__media img', c)).filter(Boolean);
-    cards.forEach((c) => {
-      const img = $('.card__media img', c);
-      if (!img) return;
-      ScrollTrigger.create({
-        trigger: c, containerAnimation: tween, start: 'left right', end: 'right left',
-        onUpdate: (self) => { img.style.translate = `${(self.progress - 0.5) * -12}% 0`; },
-      });
-    });
-    return () => { gsap.set(track, { x: 0 }); imgs.forEach((img) => { img.style.translate = ''; }); };
-  });
 }
 
 /* =========================================================
