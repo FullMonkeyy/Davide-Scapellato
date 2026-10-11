@@ -1,503 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal portfolio of Davide Scapellato - Software Developer, AI/LLM Specialist, and BSc Informatics Student at USI. Strong in Algorithms, Fullstack Development and Cloud Computing.">
-    <title>Davide Scapellato | AI & Software Developer Portfolio</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <link rel="stylesheet" href="Developerstyle.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Davide Scapellato — Software & AI Developer</title>
+  <meta name="description" content="Davide Scapellato — BSc Informatics student at USI Lugano. AI systems, full-stack products and algorithms built from first principles.">
+  <meta name="theme-color" content="#0b0b0a">
+  <meta property="og:title" content="Davide Scapellato — Software & AI Developer">
+  <meta property="og:description" content="BSc Informatics @ USI Lugano. AI, full-stack, algorithms.">
+  <meta property="og:image" content="Photo/web/portrait.webp">
+  <link rel="alternate" hreflang="it" href="index-it.html">
+  <link rel="alternate" hreflang="de" href="index-de.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0a'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-style='italic' font-size='38' fill='%23ece8e1'%3Eds%3C/text%3E%3Ccircle cx='50' cy='46' r='4' fill='%23ff4d1f'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <script>
+    // Pick the language before first paint so the page never flashes in the wrong one.
+    (function () {
+      var q = new URLSearchParams(location.search).get('lang');
+      var stored = null;
+      try { stored = localStorage.getItem('ds-lang'); } catch (e) {}
+      var lang = q || stored || 'en';
+      if (['en', 'it', 'de'].indexOf(lang) < 0) lang = 'en';
+      document.documentElement.dataset.lang = lang;
+      document.documentElement.classList.add('js');
+      // Failsafe: never leave the preloader up if a script fails to load.
+      setTimeout(function () { document.documentElement.classList.add('loader-done'); }, 7000);
+    })();
+  </script>
 </head>
 <body>
-    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+  <!-- Preloader -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__top">
+      <span class="mono">Davide Scapellato</span>
+      <span class="mono">Portfolio ©2026</span>
+    </div>
+    <div class="loader__count"><span class="loader__num">000</span></div>
+    <div class="loader__bar"><span></span></div>
+  </div>
+  <script>
+    // Start counting immediately — before any library has downloaded — and ease
+    // toward 70. main.js takes over from wherever this has reached.
+    (function () {
+      var num = document.querySelector('.loader__num');
+      var bar = document.querySelector('.loader__bar span');
+      var v = 0, on = true, t0 = performance.now();
+      function draw() {
+        num.textContent = String(Math.round(v)).padStart(3, '0');
+        bar.style.transform = 'scaleX(' + v / 100 + ')';
+      }
+      (function tick(now) {
+        if (!on) return;
+        v = 70 * (1 - Math.exp(-(now - t0) / 700));
+        draw();
+        requestAnimationFrame(tick);
+      })(t0);
+      window.__dsLoader = { stop: function () { on = false; return v; } };
+    })();
+  </script>
 
-    <header class="glass-nav">
-        <div class="nav-container">
-            <div class="logo">DS<span>.</span></div>
-            <button class="mobile-menu-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="main-nav">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav id="main-nav" class="main-nav">
-                <ul class="nav-links">
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#about">Profile</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="index-it.html" class="lang-switch" aria-label="Switch to Italian">IT</a></li>
-                    <li><a href="index-de.html" class="lang-switch" aria-label="Switch to German">DE</a></li>
-                </ul>
-            </nav>
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"><span class="cursor__label"></span></span></div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <a href="#top" class="nav__logo" aria-label="Back to top">
+      <span class="serif">ds</span><span class="dot"></span>
+    </a>
+    <nav class="nav__links" id="nav-links" aria-label="Primary">
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#experience" data-i18n="nav.experience">Experience</a>
+      <a href="#education" data-i18n="nav.education">Education</a>
+      <a href="#work" data-i18n="nav.work">Work</a>
+      <a href="#awards" data-i18n="nav.awards">Awards</a>
+    </nav>
+    <div class="nav__right">
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="en">EN</button><button data-lang="it">IT</button><button data-lang="de">DE</button>
+      </div>
+      <button class="kbd-btn" data-palette aria-label="Open command menu"><kbd>⌘</kbd><kbd>K</kbd></button>
+      <a href="#contact" class="nav__cta magnetic"><span data-i18n="nav.contact">Let's talk</span></a>
+      <button class="nav__burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" data-shape="0" aria-label="Introduction">
+      <div class="hero__meta">
+        <div class="meta">
+          <span class="mono muted" data-i18n="hero.based">Based in</span>
+          <span>Porto Ceresio, IT — Lugano, CH</span>
         </div>
-    </header>
-
-    <main>
-        <section id="hero" class="hero-section" aria-label="Main Presentation">
-            <div class="hero-content fade-in">
-                <!-- IMMAGINE DEL PROFILO CIRCOLARE (Hero) -->
-                <img src=" Photo/la-tua-foto.jpg" alt="Photo of Davide Scapellato" class="profile-pic" id="hero-profile-pic" tabindex="0" role="button" aria-label="Enlarge photo">
-                
-                <p class="greeting">Welcome, I am</p>
-                <h1 class="main-title">Davide Scapellato</h1>
-                <h2 class="subtitle">BSc Informatics Student @ USI | AI & Fullstack Developer</h2>
-                <p class="hero-desc">
-                    Passionate about software engineering and developing complex digital solutions. I build modern architectures combining rigorous academic principles with practical application, from Fullstack Development and Cloud Computing, to Machine Learning, Large Language Models (LLMs), and highly optimized Algorithms.
-                </p>
-                <div class="hero-actions">
-                    <a href="#projects" class="btn btn-primary" aria-label="Go to projects">Explore My Work</a>
-                    <a href="#contact" class="btn btn-secondary" aria-label="Go to contacts">Let's Get in Touch</a>
-                </div>
-                <div class="social-links">
-                    <a href="https://github.com/FullMonkeyy" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
-                    <a href="mailto:scapellatodavide552@gmail.com" aria-label="Send an email to Davide"><i class="fas fa-envelope"></i></a>
-                    <a href="https://www.linkedin.com/in/davide-scapellato-87a742291" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="section-container" aria-labelledby="about-title">
-            <h2 id="about-title" class="section-title fade-in">Profile & Skills</h2>
-            <div class="about-grid">
-                
-                <!-- CARD PROFILO DIAGONALE (Allargata con Immagine a Sinistra) -->
-                <article class="glass-card fade-in diagonal-card">
-                    <div class="diagonal-image-wrapper-left">
-                        <img src=" Photo/la-tua-foto.jpg" alt="Davide Scapellato Portrait">
-                    </div>
-                    <div class="diagonal-content-right">
-                        <div class="card-header" style="margin-bottom: 1rem;">
-                            <i class="fas fa-user-astronaut text-accent icon-large"></i>
-                            <h3>My Background</h3>
-                        </div>
-                        <p>
-                            With a solid technical background backed by a Diploma in Computer Science graduated with top marks (<strong>100/100</strong>), my focus is heavily geared toward <strong>Artificial Intelligence</strong>, <strong>Data Structures</strong>, and modern <strong>Cloud architectures</strong>.
-                        </p>
-                        <p>
-                            My goal is to translate academic knowledge into tangible software solutions, applying advanced algorithmic logic and ML paradigms to real-world challenges across the full stack.
-                        </p>
-                        <ul class="personal-info-list mt-4">
-                            <li><strong>Age:</strong> Born in 2006 (15/02/2006)</li>
-                            <li><strong>Nationality:</strong> Italian</li>
-                            <li><strong>Mobility:</strong> Driving License Category B</li>
-                            <li><strong>Location:</strong> Porto Ceresio (VA), IT / Ticino, CH</li>
-                            <li><strong>Language:</strong> Italian, English (Completely fluent)</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <!-- CARD COMPETENZE -->
-                <article class="glass-card fade-in full-width-card">
-                    <div class="card-header">
-                        <i class="fas fa-laptop-code text-accent icon-large"></i>
-                        <h3>Tech Stack & Skills</h3>
-                    </div>
-                    
-                    <div class="skills-category">
-                        <h4>Programming Languages & Databases</h4>
-                        <div class="skills-container">
-                            <div class="skill-tag">C</div>
-                            <div class="skill-tag">C#</div>
-                            <div class="skill-tag">Java</div>
-                            <div class="skill-tag">Python</div>
-                            <div class="skill-tag">PHP</div>
-                            <div class="skill-tag">JavaScript</div>
-                            <div class="skill-tag outline" style="border-color: var(--accent-color); color: var(--text-primary);">SQL (Advanced)</div>
-                        </div>
-                    </div>
-
-                    <div class="skills-category mt-4">
-                        <h4>AI & Data Structures (Core)</h4>
-                        <div class="skills-container">
-                            <div class="skill-tag">Algorithms & Data Structures</div>
-                            <div class="skill-tag">Machine Learning</div>
-                            <div class="skill-tag">Large Language Models (LLMs)</div>
-                        </div>
-                    </div>
-
-                    <div class="skills-category mt-4">
-                        <h4>Architecture & Cloud</h4>
-                        <div class="skills-container">
-                            <div class="skill-tag">Fullstack Development</div>
-                            <div class="skill-tag">Cloud Computing</div>
-                            <div class="skill-tag">ASP.NET & Entity Framework</div>
-                            <div class="skill-tag">Software Design</div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section id="experience" class="section-container" aria-labelledby="experience-title">
-            <h2 id="experience-title" class="section-title fade-in">Professional Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item glass-card fade-in">
-                    <div class="timeline-date">July 2026 - Present</div>
-                    <h3 class="timeline-role">Chat Operator & Support</h3>
-                    <h4 class="timeline-company">Enter Talk Pro</h4>
-                    <p>Development of excellent social skills in high-pressure environments. Optimized response times through fast typing and dynamic management of user interactions.</p>
-                </div>
-                
-                <div class="timeline-item glass-card fade-in">
-                    <div class="timeline-date">December 2025 - April 2026</div>
-                    <h3 class="timeline-role">Academic Tutor (Part-Time)</h3>
-                    <h4 class="timeline-company">Independent, Varese</h4>
-                    <p>Personalized tutoring for high school students. Developed logical paths to overcome academic obstacles, demonstrating ability to teach algorithmic thinking.</p>
-                </div>
-
-                <div class="timeline-item glass-card fade-in border-accent">
-                    <div class="timeline-date">March 2025 - April 2025</div>
-                    <h3 class="timeline-role">Internship in Web Application Development</h3>
-                    <h4 class="timeline-company">Reti S.p.A., Busto Arsizio (VA)</h4>
-                    <p>Hands-on experience in the software engineering department. Contributed to backend logic for enterprise applications. Structural implementation via <strong>ASP.NET</strong> and database mapping using <strong>Entity Framework Core in C#</strong>.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="education" class="section-container" aria-labelledby="education-title">
-            <h2 id="education-title" class="section-title fade-in">Education & Academic Focus</h2>
-            
-            <div class="edu-main-grid">
-                <!-- CARD GRANDE DEDICATA ALL'USI -->
-                <article class="glass-card edu-card usi-feature-card highlight fade-in">
-                    <div class="usi-image-wrapper">
-                        <img src=" Photo/USI_Facolty_of_Informatics.jpg" alt="Università della Svizzera Italiana (USI) Campus">
-                        <div class="usi-badge">BSc in Informatics</div>
-                    </div>
-                    <div class="usi-content">
-                        <div class="edu-header-inline">
-                            <i class="fas fa-university text-accent icon-large"></i>
-                            <div>
-                                <h3>Università della Svizzera Italiana (USI)</h3>
-                                <h4>Faculty of Informatics - Lugano, CH</h4>
-                            </div>
-                        </div>
-                        <span class="date">September 2025 - Present</span>
-                        <p style="margin-top: 1rem;">
-                            I am pursuing my Bachelor's degree in an internationally recognized center of excellence for computer science. The curriculum at USI is entirely taught in English and stands out for its <strong>innovative, project-based approach</strong>.
-                        </p>
-                        <p style="margin-top: 0.8rem; color: var(--text-secondary);">
-                            Through intensive, team-oriented "Software Ateliers", I am required to bridge the gap between abstract theoretical principles—such as advanced algorithms, discrete mathematics, and complex systems architecture—and real-world software engineering. This immersive environment perfectly complements my deep interest in Machine Learning models and Artificial Intelligence structures.
-                        </p>
-                    </div>
-                </article>
-
-                <!-- CARD DIPLOMA (Allargata con Immagine a Sinistra) -->
-                <article class="glass-card fade-in diagonal-card">
-                    <div class="diagonal-image-wrapper-left">
-                        <img src=" Photo/keynes.png" alt="ISIS J.M. Keynes High School">
-                    </div>
-                    <div class="diagonal-content-right">
-                        <div class="edu-header-inline">
-                            <i class="fas fa-graduation-cap text-accent icon-large"></i>
-                            <div>
-                                <h3>Technical Diploma in Informatics</h3>
-                                <h4>ISIS J.M. Keynes - Gazzada Schianno (VA)</h4>
-                            </div>
-                        </div>
-                        <span class="date">Sep 2020 - Jun 2025</span>
-                        <p style="margin-top: 1rem;">
-                            Excellent grade: <strong>100/100</strong>. Methodological acquisition in object-oriented programming, OS, and network design. Active role as Student Representative in the Student Council (2024-2025).
-                        </p>
-                    </div>
-                </article>
-            </div>
-
-            <h3 class="sub-section-title fade-in mt-6 text-center">Specialization Courses</h3>
-            <div class="cert-grid mt-4">
-                <div class="glass-card cert-card fade-in text-center">
-                    <i class="fas fa-brain text-accent icon-large mb-2"></i>
-                    <h4>AI and Time Series</h4>
-                    <p>Policollege, Politecnico di Milano</p>
-                    <span class="date">Oct 2024 - Nov 2024</span>
-                </div>
-                <div class="glass-card cert-card fade-in text-center">
-                    <i class="fab fa-android text-accent icon-large mb-2"></i>
-                    <h4>Android App Development</h4>
-                    <p>J.M. Keynes</p>
-                    <span class="date">Feb 2023 - May 2023</span>
-                </div>
-                <div class="glass-card cert-card fade-in text-center">
-                    <i class="fas fa-language text-accent icon-large mb-2"></i>
-                    <h4>Cambridge First Certificate (B2)</h4>
-                    <p>University of Cambridge</p>
-                    <span class="date">Obtained Oct 2023</span>
-                </div>
-            </div>
-        </section>
-
-         <section id="projects" class="section-container" aria-labelledby="projects-title">
-            <h2 id="projects-title" class="section-title fade-in">GitHub Projects & Experiments</h2>
-            <p class="section-desc fade-in text-center mx-auto" style="max-width: 600px; color: var(--text-secondary); margin-bottom: 3rem;">
-                A selection of my public open-source repositories showcasing my skills in AI, Machine Learning, Fullstack architectures, and pure algorithmic logic.
-            </p>
-            
-            <div class="projects-grid">
-                
-                <!-- PROGETTO IN PRIMO PIANO: OBD.IA (Card Orizzontale) -->
-            <article class="glass-card project-card fade-in" style="grid-column: 1 / -1; display: flex; flex-direction: row; flex-wrap: wrap; padding: 0;">
-                <div class="project-image" style="flex: 1; min-width: 300px; height: auto; min-height: 280px; border-bottom: none; border-right: 1px solid var(--glass-border);">
-                    <img src=" Photo/OBDIA.jpg" alt="OBD.IA Automotive Telemetry" style="height: 100%; object-fit: cover;">
-                </div>
-                <div class="project-content" style="flex: 1.5; padding: 2.5rem;">
-                    <h3 style="margin-bottom: 0.5rem; font-size: 1.6rem;">OBD.IA - Advanced Automotive Telemetry</h3>
-                    
-                    <!-- Contenitore Badge -->
-                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
-                        <div style="background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.3);">
-                            <i class="fas fa-fire"></i> Developed at 20
-                        </div>
-                        <div style="background: rgba(148, 163, 184, 0.1); color: var(--text-secondary); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; border: 1px solid var(--glass-border);">
-                            <i class="fas fa-calendar-alt"></i> August 2026
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 0; font-size: 1.05rem; line-height: 1.7;">
-                        Cooming soon...
-                    </p>
-                    
-                    <div class="project-tech" style="margin-bottom: 2rem;">
-                        <span>Python</span> <span>Swift (iOS)</span> <span>Node.js</span> <span>Express.js</span> <span>JavaScript</span> <span>SQL</span> <span>HTML/CSS</span>
-                    </div>
-                    
-                    <a href="#projects" class="btn btn-sm btn-outline" style="opacity: 0.6; cursor: not-allowed; pointer-events: none; width: fit-content;" aria-label="Not released yet">
-                        <i class="fas fa-lock mr-1" style="margin-right: 8px;"></i> Not released yet
-                    </a>
-                </div>
-            </article>
-
-                <!-- PROGETTO 1: Machine Learning (C/C++) -->
-                
-
-                <!-- PROGETTO 2: Vanessa Gemini AI -->
-                <article class="glass-card project-card fade-in">
-                    <div class="project-image">
-                        <img src=" Photo/VGemini.jpg" alt="Vanessa Gemini AI Assistant">
-                    </div>
-                    <div class="project-content">
-                        <h3 style="margin-bottom: 0.3rem;">Vanessa - Gemini AI Assistant</h3>
-                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
-                            <i class="fas fa-fire"></i> Developed at 18
-                        </div>
-                        <p style="margin-top: 0;">An intelligent AI Assistant application powered by Google's Gemini LLM. Developed to explore API integrations, prompt engineering, and intelligent response parsing within a robust C# application.</p>
-                        <div class="project-tech">
-                            <span>C#</span> <span>Python</span>  <span>Gemini AI</span> <span>LLM</span> <span>API</span> <span>PIPE</span> <span>AWS</span> 
-                        </div>
-                        <a href="https://github.com/FullMonkeyy/Vanessa-Gemini-AI-Assistant" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="View Vanessa-Gemini-AI repository">
-                            Repository <i class="fab fa-github ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-                     <article class="glass-card project-card fade-in">
-                    <div class="project-image">
-                        <img src=" Photo/ML_Regression.jpg" alt="Sine & Linear ML Regressor">
-                    </div>
-                    <div class="project-content">
-                        <h3 style="margin-bottom: 0.3rem;">Sine & Linear ML Regressor</h3>
-                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
-                            <i class="fas fa-fire"></i> Developed at 17
-                        </div>
-                        <p style="margin-top: 0;">A low-level implementation of a Machine Learning linear regressor model combined with a Sine wave. Built entirely to demonstrate deep mathematical understanding without relying on high-level Python libraries.</p>
-                        <div class="project-tech">
-                            <span>C</span> <span>C++</span> <span>Machine Learning</span> <span>Math</span>
-                        </div>
-                        <a href="https://github.com/FullMonkeyy/SineLinear-Regressor-C" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="View SineLinear-Regressor-C repository">
-                            Repository <i class="fab fa-github ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-                <!-- PROGETTO 3: VMETA SCUOLA -->
-                <article class="glass-card project-card fade-in">
-                    <div class="project-image">
-                        <img src=" Photo/VMeta.jpg" alt="VMETA Scuola">
-                    </div>
-                    <div class="project-content">
-                        <h3 style="margin-bottom: 0.3rem;">VMETA Scuola</h3>
-                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
-                            <i class="fas fa-fire"></i> Developed at 18
-                        </div>
-                        <p style="margin-top: 0;">An Artificial Intelligence management system designed specifically for students. Built with C# to provide an intelligent interface for educational management and data handling.</p>
-                        <div class="project-tech">
-                            <span>C#</span> <span>Python</span> <span>ASP.NET Core</span>  <span>HTML/CSS</span> <span>Javascript</span>  <span>AI</span> <span>Telegram Bot</span>  <span>Management System</span> 
-                        </div>
-                        <a href="https://github.com/FullMonkeyy/VMETA_SCUOLA" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="View VMETA repository">
-                            Repository <i class="fab fa-github ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-                
-           
-                <!-- PROGETTO 4: ASP.NET Enterprise -->
-                <article class="glass-card project-card fade-in">
-                    <div class="project-image">
-                        <img src=" Photo/MS_Book.jpg" alt="Enterprise Book Management">
-                    </div>
-                    <div class="project-content">
-                        <h3 style="margin-bottom: 0.3rem;">Enterprise Book Management</h3>
-                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
-                            <i class="fas fa-fire"></i> Developed at 18
-                        </div>
-                        <p style="margin-top: 0;">An ASP.NET RESTful web application developed during my internship at Reti S.p.A. Showcases a modern backend architecture, relational database management, and robust API endpoints.</p>
-                        <div class="project-tech">
-                            <span>C#</span> <span>HTML/CSS</span> <span>ASP.NET Core</span> <span>REST API</span> <span>JavaScript</span>
-                        </div>
-                        <a href="https://github.com/FullMonkeyy/MicrosoftBooks-WebApplicationProject" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="View ASP.NET repository">
-                            Repository <i class="fab fa-github ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- PROGETTO 5: WHATSAPP CLONE -->
-                <article class="glass-card project-card fade-in">
-                    <div class="project-image">
-                        <img src=" Photo/WhatsappTCP.jpg" alt="WhatsApp WPF Emulator">
-                    </div>
-                    <div class="project-content">
-                        <h3 style="margin-bottom: 0.3rem;">WhatsApp WPF Emulator</h3>
-                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
-                            <i class="fas fa-fire"></i> Developed at 18
-                        </div>
-                        <p style="margin-top: 0;">A desktop Windows Presentation Foundation (WPF) application built in C# that faithfully emulates the graphical interface and core functionalities of WhatsApp messaging.</p>
-                        <div class="project-tech">
-                            <span>C#</span> <span>WPF</span> <span>Desktop App</span> <span>UI/UX</span>
-                        </div>
-                        <a href="https://github.com/FullMonkeyy/WHATTSAPP" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="View WHATSAPP repository">
-                            Repository <i class="fab fa-github ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- PROGETTO 6: Vanilla JS Game -->
-                <article class="glass-card project-card fade-in">
-                    <div class="project-image">
-                        <img src=" Photo/Supermario.jpg" alt="Vanilla JS Super Mario">
-                    </div>
-                    <div class="project-content">
-                        <h3 style="margin-bottom: 0.3rem;">Vanilla JS Super Mario</h3>
-                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
-                            <i class="fas fa-fire"></i> Developed at 17
-                        </div>
-                        <p style="margin-top: 0;">A fully playable Super Mario web game developed entirely from scratch. Features custom physics, collision detection algorithms, and interactive DOM manipulation using pure JavaScript.</p>
-                        <div class="project-tech">
-                            <span>JavaScript</span> <span>HTML/CSS</span> <span>Algorithms</span>
-                        </div>
-                        <a href="https://github.com/FullMonkeyy/Super-Mario-Web-Game" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" aria-label="View Super Mario repository">
-                            Play & Source <i class="fab fa-github ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-
-        <!-- ========================================= -->
-        <!-- SEZIONE PREMI E NOTIZIE (Inizia da qui) -->
-        <!-- ========================================= -->
-        <section id="news" class="section-container" aria-labelledby="news-title">
-            <h2 id="news-title" class="section-title fade-in">Awards & Featured News</h2>
-            <p class="section-desc fade-in text-center mx-auto" style="max-width: 600px; color: var(--text-secondary); margin-bottom: 3rem;">
-                A collection of my academic recognitions, hackathon victories, and media features.
-            </p>
-            
-            <div class="projects-grid">
-                
-                <!-- NOTIZIA 1: Confindustria 2025 -->
-                <article class="glass-card project-card fade-in">
-                    <div class="project-image">
-                        <!-- Spazio nel percorso rimosso -->
-                        <img src="Photo/confphoto.png" alt="Confindustria Scholarship Award">
-                    </div>
-                    <div class="project-content">
-                        <h3 style="margin-bottom: 0.5rem;">Confindustria Scholarship Award</h3>
-                        
-                        <div style="display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.3); width: fit-content;">
-                            <i class="fas fa-award"></i> 2025 Award
-                        </div>
-                        
-                        <p style="margin-top: 0; flex-grow: 1;">Awarded a prestigious scholarship by Confindustria in recognition of academic excellence, technical potential, and dedication to the field of computer science.</p>
-                        
-                        <!-- Pulsante impostato su disabilitato/privato di default -->
-                        <a href="https://www.confindustriavarese.it/web_v4/site.nsf/dx/Generazione-d%E2%80%99Industria-l%E2%80%99investimento-nella-cultura-d%E2%80%99impresa-tra-i-giovani-arriva-a-sfiorare-1-milione-di-euro" class="btn btn-sm btn-outline" style="width: fit-content; " aria-label="Certificate Obtained">
-                             View the article
-                        </a>
-                    </div>
-                </article>
-
-                <!-- NOTIZIA 2: Smart Drone 2024 -->
-                <article class="glass-card project-card fade-in">
-                    <div class="project-image">
-                        <img src="Photo/innophoto.png" alt="Smart Drone AI Project">
-                    </div>
-                    <div class="project-content">
-                        <h3 style="margin-bottom: 0.5rem;">Smart Drone AI Engineering</h3>
-                        
-                        <div style="display: inline-block; background: rgba(148, 163, 184, 0.1); color: var(--text-secondary); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 1rem; border: 1px solid var(--glass-border); width: fit-content;">
-                            <i class="fas fa-robot"></i> 2024 Project Feature
-                        </div>
-                        
-                        <p style="margin-top: 0; flex-grow: 1;">Participated in the design and engineering of a smart drone, taking responsibility for the Artificial Intelligence module. Developed and integrated a reliable facial recognition system for secure user authentication.</p>
-                        
-                        <a href="https://www.isiskeynes.edu.it/pagine/leonardo-e-galileo-mai-cos-vicini" class="btn btn-sm btn-outline" style="width: fit-content; " aria-label="Private Project">
-                           View the article
-                        </a>
-                    </div>
-                </article>
-
-                <!-- NOTIZIA 3: Policollege 2023 -->
-                <article class="glass-card project-card fade-in">
-                    <div class="project-image">
-                        <img src="Photo/artificial-intelligence-g895db704d_1280jpg.jpg" alt="Policollege AI Selection">
-                    </div>
-                    <div class="project-content">
-                        <h3 style="margin-bottom: 0.5rem;">Policollege - Politecnico di Milano</h3>
-                        
-                        <div style="display: inline-block; background: rgba(148, 163, 184, 0.1); color: var(--text-secondary); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 1rem; border: 1px solid var(--glass-border); width: fit-content;">
-                            <i class="fas fa-university"></i> 2023 Academic Selection
-                        </div>
-                        
-                        <p style="margin-top: 0; flex-grow: 1;">Won the rigorous selection process to participate in the exclusive Policollege webinar series hosted by Politecnico di Milano, focusing on advanced Artificial Intelligence concepts and time series analysis.</p>
-                        
-                        <a href="https://www.policollege.polimi.it/2023/05/16/intelligenza-artificiale-e-serie-temporali-scopri-come-predire-il-futuro-grazie-allai/" class="btn btn-sm btn-outline" style="width: fit-content;  " aria-label="Certificate Obtained">
-                            View the article
-                        </a>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-        <!-- ========================================= -->
-        <!-- FINE SEZIONE PREMI E NOTIZIE              -->
-        <!-- ========================================= -->
-        
-    </main>
-
-    <footer id="contact" class="glass-footer">
-        <div class="footer-content fade-in">
-            <h2 class="mb-2">Open to New Challenges</h2>
-            <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 2rem;">
-                Currently seeking part-time job opportunities or pre-graduation experiences in Software Engineering, Fullstack or AI roles to work alongside my studies at USI.
-            </p>
-            <div class="contact-methods">
-                <a href="tel:+393203440031" aria-label="Call Davide"><i class="fas fa-phone-alt"></i> +39 3203440031</a>
-                <a href="mailto:scapellatodavide552@gmail.com" aria-label="Send email"><i class="fas fa-paper-plane"></i> scapellatodavide552@gmail.com</a>
-                <span style="color: var(--text-secondary);"><i class="fas fa-map-marker-alt"></i> Via Roberto Ticli 6, 21050 Porto Ceresio (VA), Italy</span>
-            </div>
-            
-            <div class="footer-bottom mt-6">
-                <p>&copy; 2026 Davide Scapellato. Independent Web Architecture & Development.</p>
-            </div>
+        <div class="meta">
+          <span class="mono muted" data-i18n="hero.time">Local time</span>
+          <span><span class="clock">--:--:--</span> CET</span>
         </div>
-    </footer>
+        <div class="meta">
+          <span class="mono muted" data-i18n="hero.status">Status</span>
+          <span class="status"><i class="pulse"></i><span data-i18n="hero.available">Open to part-time roles</span></span>
+        </div>
+      </div>
 
-    <div id="image-modal" class="image-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Enlarged profile photo">
-        <button class="close-modal-btn" aria-label="Close enlarged view">&times;</button>
-        <img class="modal-content" id="modal-img" alt="Davide Scapellato enlarged">
+      <h1 class="hero__title" aria-label="Davide Scapellato">
+        <span class="line"><span class="word" data-chars>Davide</span></span>
+        <span class="line line--indent"><span class="serif italic word" data-chars>Scapellato</span></span>
+      </h1>
+
+      <div class="hero__bottom">
+        <p class="hero__lede" data-i18n="hero.lede">Informatics student at USI Lugano. I build AI systems, full-stack products and algorithms from first principles.</p>
+        <div class="hero__actions">
+          <a href="#work" class="btn btn--light magnetic"><span data-i18n="hero.cta1">Selected work</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <a href="#contact" class="btn btn--ghost magnetic"><span data-i18n="hero.cta2">Get in touch</span></a>
+        </div>
+        <div class="hero__scroll mono"><span class="hero__scroll-line"></span><span data-i18n="hero.scroll">Scroll</span></div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Machine Learning</span><i></i><span class="serif italic">Large Language Models</span><i></i><span>Algorithms</span><i></i><span class="serif italic">Full-stack</span><i></i><span>Cloud Computing</span><i></i><span class="serif italic">C · C# · Python · Java</span><i></i>
+        <span>Machine Learning</span><i></i><span class="serif italic">Large Language Models</span><i></i><span>Algorithms</span><i></i><span class="serif italic">Full-stack</span><i></i><span>Cloud Computing</span><i></i><span class="serif italic">C · C# · Python · Java</span><i></i>
+      </div>
     </div>
 
-    <script src="Developerscript.js"></script>
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="section about" data-shape="1">
+      <header class="section__head">
+        <span class="mono idx">(01)</span>
+        <h2 class="mono" data-i18n="about.label">Profile</h2>
+      </header>
+
+      <p class="statement" data-split data-i18n="about.statement">I like understanding software down to the metal — a regression model in plain C, a physics engine in vanilla JavaScript, an assistant built on top of an LLM. At USI in Lugano I'm turning that curiosity into engineering.</p>
+
+      <div class="about__grid">
+        <figure class="portrait tilt" data-cursor="Hi">
+          <div class="portrait__inner">
+            <img src="Photo/web/portrait.webp" alt="Portrait of Davide Scapellato" width="770" height="760" loading="lazy">
+            <span class="portrait__scan"></span>
+          </div>
+          <figcaption class="mono"><span>DS—2006</span><span>45.90°N 8.90°E</span></figcaption>
+        </figure>
+
+        <div class="about__text">
+          <p data-i18n-html="about.p1">I graduated from my technical diploma in Computer Science with <strong>100/100</strong>. Since then my focus has narrowed to three things: <em>artificial intelligence</em>, <em>data structures</em> and <em>modern cloud architectures</em>.</p>
+          <p data-i18n="about.p2">The goal is simple — turn academic knowledge into software people can actually use, applying algorithmic thinking and ML to real problems across the whole stack.</p>
+
+          <dl class="facts">
+            <div><dt class="mono" data-i18n="about.born">Born</dt><dd>15.02.2006 · <span class="age"></span></dd></div>
+            <div><dt class="mono" data-i18n="about.nat">Nationality</dt><dd data-i18n="about.natv">Italian</dd></div>
+            <div><dt class="mono" data-i18n="about.lang">Languages</dt><dd data-i18n="about.langv">Italian (native), English (fluent), German (learning)</dd></div>
+            <div><dt class="mono" data-i18n="about.mob">Mobility</dt><dd data-i18n="about.mobv">Driving licence B</dd></div>
+            <div><dt class="mono" data-i18n="about.loc">Location</dt><dd>Porto Ceresio (VA), IT / Ticino, CH</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span class="stat__num"><span data-count="100">0</span><small>/100</small></span><span class="mono muted" data-i18n="stats.grade">Diploma grade</span></div>
+        <div class="stat"><span class="stat__num"><span data-count="6">0</span></span><span class="mono muted" data-i18n="stats.repos">Open-source repos</span></div>
+        <div class="stat"><span class="stat__num"><span data-count="3">0</span></span><span class="mono muted" data-i18n="stats.awards">Awards &amp; selections</span></div>
+        <div class="stat"><span class="stat__num"><span data-count="7">0</span></span><span class="mono muted" data-i18n="stats.langs">Programming languages</span></div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section id="skills" class="section skills" data-shape="1">
+      <header class="section__head">
+        <span class="mono idx">(02)</span>
+        <h2 class="mono" data-i18n="skills.label">Toolbox</h2>
+      </header>
+      <div class="skills__grid">
+        <div class="sphere-wrap">
+          <div class="sphere" aria-hidden="true"></div>
+          <span class="sphere__hint mono muted" data-i18n="skills.hint">Hover a skill to find it</span>
+        </div>
+        <div class="skills__lists">
+          <div class="skill-group">
+            <h3><span class="mono muted">A</span><span data-i18n="skills.g1">Languages &amp; data</span></h3>
+            <ul><li data-skill="c">C</li><li data-skill="cs">C#</li><li data-skill="java">Java</li><li data-skill="py">Python</li><li data-skill="php">PHP</li><li data-skill="js">JavaScript</li><li class="hl" data-skill="sql" data-i18n="skills.sql">SQL — advanced</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3><span class="mono muted">B</span><span data-i18n="skills.g2">AI &amp; foundations</span></h3>
+            <ul><li data-skill="algo" data-i18n="skills.algo">Algorithms &amp; Data Structures</li><li data-skill="ml">Machine Learning</li><li data-skill="llm">Large Language Models</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3><span class="mono muted">C</span><span data-i18n="skills.g3">Architecture &amp; cloud</span></h3>
+            <ul><li data-skill="fs">Full-stack</li><li data-skill="cloud">Cloud Computing</li><li data-skill="asp">ASP.NET</li><li data-skill="ef">Entity Framework</li><li data-skill="design">Software Design</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="experience" class="section experience" data-shape="2">
+      <header class="section__head">
+        <span class="mono idx">(03)</span>
+        <h2 class="mono" data-i18n="exp.label">Experience</h2>
+      </header>
+      <h3 class="big-title reveal-lines" data-i18n-html="exp.title">Where I've <span class="serif italic">worked</span></h3>
+
+      <ol class="rows">
+        <li class="row">
+          <span class="row__date mono" data-i18n="exp.0.date">Current</span>
+          <div class="row__main">
+            <h4 data-i18n="exp.0.role">Programming Instructor</h4>
+            <p class="row__desc" data-i18n="exp.0.desc">Teaching the basics of programming to students in Swiss high schools, on behalf of USI — turning first lines of code into a way of thinking.</p>
+          </div>
+          <span class="row__org">USI, Lugano</span>
+        </li>
+        <li class="row">
+          <span class="row__date mono" data-i18n="exp.1.date">Jul 2026 — Now</span>
+          <div class="row__main">
+            <h4 data-i18n="exp.1.role">Chat Operator &amp; Support</h4>
+            <p class="row__desc" data-i18n="exp.1.desc">Strong communication under pressure. Cut response times through fast typing and dynamic handling of many user conversations at once.</p>
+          </div>
+          <span class="row__org">Enter Talk Pro</span>
+        </li>
+        <li class="row">
+          <span class="row__date mono" data-i18n="exp.2.date">Dec 2025 — Apr 2026</span>
+          <div class="row__main">
+            <h4 data-i18n="exp.2.role">Academic Tutor, part-time</h4>
+            <p class="row__desc" data-i18n="exp.2.desc">One-to-one tutoring for high-school students. Designed step-by-step learning paths around their blockers — teaching algorithmic thinking, not just answers.</p>
+          </div>
+          <span class="row__org" data-i18n="exp.2.org">Independent, Varese</span>
+        </li>
+        <li class="row">
+          <span class="row__date mono" data-i18n="exp.3.date">Mar — Apr 2025</span>
+          <div class="row__main">
+            <h4 data-i18n="exp.3.role">Web Application Development Intern</h4>
+            <p class="row__desc" data-i18n-html="exp.3.desc">Software engineering department. Contributed to backend logic for enterprise applications, built with <strong>ASP.NET</strong> and <strong>Entity Framework Core</strong> in C#.</p>
+          </div>
+          <span class="row__org">Reti S.p.A., Busto Arsizio</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ EDUCATION ============ -->
+    <section id="education" class="section education" data-shape="2">
+      <header class="section__head">
+        <span class="mono idx">(04)</span>
+        <h2 class="mono" data-i18n="edu.label">Education</h2>
+      </header>
+
+      <article class="usi">
+        <div class="usi__media" data-cursor="USI">
+          <img src="Photo/web/usi.webp" alt="USI campus in Lugano" width="1417" height="945" loading="lazy">
+          <span class="chip mono">BSc Informatics</span>
+        </div>
+        <div class="usi__body">
+          <span class="mono muted" data-i18n="edu.usi.date">Sep 2025 — present · Lugano, CH</span>
+          <h3>Università della <span class="serif italic">Svizzera italiana</span></h3>
+          <p class="muted-strong" data-i18n="edu.usi.fac">Faculty of Informatics</p>
+          <p data-i18n-html="edu.usi.p1">An internationally recognised centre for computer science, taught entirely in English and built around an <strong>innovative, project-based approach</strong>.</p>
+          <p class="muted" data-i18n="edu.usi.p2">In the team-based "Software Ateliers" I bridge theory — advanced algorithms, discrete mathematics, systems architecture — with real-world engineering. It pairs naturally with my interest in machine learning.</p>
+        </div>
+      </article>
+
+      <article class="diploma">
+        <div class="diploma__media"><img src="Photo/web/keynes.webp" alt="ISIS J.M. Keynes school building" width="1199" height="374" loading="lazy"></div>
+        <div class="diploma__body">
+          <span class="mono muted" data-i18n="edu.dip.date">Sep 2020 — Jun 2025</span>
+          <h3 data-i18n="edu.dip.title">Technical Diploma in Informatics</h3>
+          <p class="muted-strong">ISIS J.M. Keynes — Gazzada Schianno (VA)</p>
+          <p data-i18n-html="edu.dip.p">Graduated with <strong>100/100</strong>. Object-oriented programming, operating systems and network design. Student representative on the school council, 2024–2025.</p>
+        </div>
+        <div class="diploma__grade" aria-hidden="true"><span class="serif italic">100</span><small class="mono">/100</small></div>
+      </article>
+
+      <div class="courses">
+        <h4 class="mono muted" data-i18n="edu.courses">Specialisation courses</h4>
+        <ul>
+          <li><span data-i18n="edu.c1">AI and Time Series</span><span class="muted">Policollege, Politecnico di Milano</span><span class="mono muted" data-i18n="edu.c1d">Oct — Nov 2024</span></li>
+          <li><span data-i18n="edu.c2">Android App Development</span><span class="muted">ISIS J.M. Keynes</span><span class="mono muted" data-i18n="edu.c2d">Feb — May 2023</span></li>
+          <li><span data-i18n="edu.c3">Cambridge First Certificate (B2)</span><span class="muted" data-i18n="edu.c3o">University of Cambridge</span><span class="mono muted" data-i18n="edu.c3d">Oct 2023</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section id="work" class="work" data-shape="3">
+      <div class="work__pin">
+        <div class="work__track">
+          <header class="work__head">
+            <div class="section__head">
+              <span class="mono idx">(05)</span>
+              <h2 class="mono" data-i18n="work.label">Selected work</h2>
+            </div>
+            <h3 class="big-title" data-i18n-html="work.title">Things I've <span class="serif italic">built</span></h3>
+            <p class="muted work__intro" data-i18n="work.intro">Open-source repositories across AI, machine learning, full-stack architecture and pure algorithmic logic.</p>
+          </header>
+
+          <article class="card card--feature" data-cursor="Soon">
+            <div class="card__media"><img src="Photo/web/obdia.webp" alt="OBD.IA logo" width="1600" height="893" loading="lazy"></div>
+            <div class="card__body">
+              <div class="card__top mono"><span class="tag tag--live"><i class="pulse"></i><span data-i18n="work.dev">In development</span></span><span>2026</span></div>
+              <h4>OBD.IA</h4>
+              <p data-i18n="work.obd">Advanced automotive telemetry, from the car's OBD port to a native iOS app. Built at 20 — full reveal soon.</p>
+              <ul class="stack mono"><li>Python</li><li>Swift</li><li>Node.js</li><li>Express</li><li>SQL</li></ul>
+            </div>
+          </article>
+
+          <a class="card" href="https://github.com/FullMonkeyy/Vanessa-Gemini-AI-Assistant" target="_blank" rel="noopener" data-cursor="View">
+            <div class="card__media"><img src="Photo/web/vgemini.webp" alt="Vanessa, Gemini AI assistant" width="1600" height="893" loading="lazy"></div>
+            <div class="card__body">
+              <div class="card__top mono"><span>02</span><span data-i18n="work.age18">Built at 18</span></div>
+              <h4>Vanessa</h4>
+              <p data-i18n="work.vanessa">An AI assistant on top of Google's Gemini LLM — API integration, prompt engineering and response parsing inside a solid C# application.</p>
+              <ul class="stack mono"><li>C#</li><li>Python</li><li>Gemini</li><li>AWS</li></ul>
+            </div>
+          </a>
+
+          <a class="card" href="https://github.com/FullMonkeyy/SineLinear-Regressor-C" target="_blank" rel="noopener" data-cursor="View">
+            <div class="card__media"><img src="Photo/web/ml-regression.webp" alt="Sine and linear regressor" width="1600" height="893" loading="lazy"></div>
+            <div class="card__body">
+              <div class="card__top mono"><span>03</span><span data-i18n="work.age17">Built at 17</span></div>
+              <h4 data-i18n="work.reg.t">Sine &amp; Linear Regressor</h4>
+              <p data-i18n="work.reg">A linear + sine-wave ML regressor written at low level, without high-level Python libraries — just the math.</p>
+              <ul class="stack mono"><li>C</li><li>C++</li><li>ML</li><li>Math</li></ul>
+            </div>
+          </a>
+
+          <a class="card" href="https://github.com/FullMonkeyy/VMETA_SCUOLA" target="_blank" rel="noopener" data-cursor="View">
+            <div class="card__media"><img src="Photo/web/vmeta.webp" alt="VMETA Scuola" width="1600" height="893" loading="lazy"></div>
+            <div class="card__body">
+              <div class="card__top mono"><span>04</span><span data-i18n="work.age18">Built at 18</span></div>
+              <h4>VMETA Scuola</h4>
+              <p data-i18n="work.vmeta">An AI-driven management system for students, with a web interface and a Telegram bot for school data and organisation.</p>
+              <ul class="stack mono"><li>C#</li><li>ASP.NET Core</li><li>Python</li><li>Telegram</li></ul>
+            </div>
+          </a>
+
+          <a class="card" href="https://github.com/FullMonkeyy/MicrosoftBooks-WebApplicationProject" target="_blank" rel="noopener" data-cursor="View">
+            <div class="card__media"><img src="Photo/web/ms-book.webp" alt="Enterprise book management" width="1600" height="893" loading="lazy"></div>
+            <div class="card__body">
+              <div class="card__top mono"><span>05</span><span data-i18n="work.age18">Built at 18</span></div>
+              <h4 data-i18n="work.books.t">Enterprise Book Manager</h4>
+              <p data-i18n="work.books">A RESTful ASP.NET web app built during my internship at Reti S.p.A. — relational data modelling and clean API endpoints.</p>
+              <ul class="stack mono"><li>C#</li><li>ASP.NET Core</li><li>REST</li><li>JS</li></ul>
+            </div>
+          </a>
+
+          <a class="card" href="https://github.com/FullMonkeyy/WHATTSAPP" target="_blank" rel="noopener" data-cursor="View">
+            <div class="card__media"><img src="Photo/web/whatsapptcp.webp" alt="WhatsApp WPF emulator" width="1600" height="893" loading="lazy"></div>
+            <div class="card__body">
+              <div class="card__top mono"><span>06</span><span data-i18n="work.age18">Built at 18</span></div>
+              <h4 data-i18n="work.wa.t">WhatsApp Emulator</h4>
+              <p data-i18n="work.wa">A WPF desktop app in C# that faithfully recreates WhatsApp's interface and core messaging over TCP.</p>
+              <ul class="stack mono"><li>C#</li><li>WPF</li><li>TCP</li><li>UI</li></ul>
+            </div>
+          </a>
+
+          <a class="card" href="https://github.com/FullMonkeyy/Super-Mario-Web-Game" target="_blank" rel="noopener" data-cursor="Play">
+            <div class="card__media"><img src="Photo/web/supermario.webp" alt="Vanilla JS Super Mario" width="1600" height="893" loading="lazy"></div>
+            <div class="card__body">
+              <div class="card__top mono"><span>07</span><span data-i18n="work.age17">Built at 17</span></div>
+              <h4>Super Mario.js</h4>
+              <p data-i18n="work.mario">A fully playable Super Mario built from scratch — custom physics, collision detection and DOM rendering in pure JavaScript.</p>
+              <ul class="stack mono"><li>JavaScript</li><li>Physics</li><li>Algorithms</li></ul>
+            </div>
+          </a>
+
+          <a class="card card--more" href="https://github.com/FullMonkeyy" target="_blank" rel="noopener" data-cursor="GitHub">
+            <span class="serif italic" data-i18n="work.more">More on GitHub</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+        <div class="work__bar" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+
+    <!-- ============ AWARDS ============ -->
+    <section id="awards" class="section awards" data-shape="4">
+      <header class="section__head">
+        <span class="mono idx">(06)</span>
+        <h2 class="mono" data-i18n="awards.label">Awards &amp; press</h2>
+      </header>
+      <h3 class="big-title" data-i18n-html="awards.title">Recognition &amp; <span class="serif italic">features</span></h3>
+
+      <ul class="awards__list">
+        <li>
+          <a href="https://www.confindustriavarese.it/web_v4/site.nsf/dx/Generazione-d%E2%80%99Industria-l%E2%80%99investimento-nella-cultura-d%E2%80%99impresa-tra-i-giovani-arriva-a-sfiorare-1-milione-di-euro" target="_blank" rel="noopener" class="award" data-img="Photo/web/confphoto.webp">
+            <span class="mono award__year">2025</span>
+            <span class="award__title" data-i18n="aw.1.t">Confindustria Scholarship</span>
+            <span class="award__desc muted" data-i18n="aw.1.d">Awarded for academic excellence, technical potential and dedication to computer science.</span>
+            <span class="award__cta mono"><span data-i18n="aw.read">Read article</span> ↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.isiskeynes.edu.it/pagine/leonardo-e-galileo-mai-cos-vicini" target="_blank" rel="noopener" class="award" data-img="Photo/web/innophoto.webp">
+            <span class="mono award__year">2024</span>
+            <span class="award__title" data-i18n="aw.2.t">Smart Drone — AI module</span>
+            <span class="award__desc muted" data-i18n="aw.2.d">Led the AI module of a smart drone, building a facial-recognition system for secure user authentication.</span>
+            <span class="award__cta mono"><span data-i18n="aw.read">Read article</span> ↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.policollege.polimi.it/2023/05/16/intelligenza-artificiale-e-serie-temporali-scopri-come-predire-il-futuro-grazie-allai/" target="_blank" rel="noopener" class="award" data-img="Photo/web/policollege.webp">
+            <span class="mono award__year">2023</span>
+            <span class="award__title" data-i18n="aw.3.t">Policollege — Politecnico di Milano</span>
+            <span class="award__desc muted" data-i18n="aw.3.d">Selected for the Policollege programme on advanced AI and time-series analysis.</span>
+            <span class="award__cta mono"><span data-i18n="aw.read">Read article</span> ↗</span>
+          </a>
+        </li>
+      </ul>
+      <div class="award-preview" aria-hidden="true"><img alt=""></div>
+    </section>
+  </main>
+
+  <!-- ============ CONTACT ============ -->
+  <footer id="contact" class="contact" data-shape="4" data-dx="0.4" data-dy="2.3">
+    <div class="section__head">
+      <span class="mono idx">(07)</span>
+      <h2 class="mono" data-i18n="contact.label">Contact</h2>
+    </div>
+
+    <p class="contact__kicker" data-i18n="contact.kicker">Open to part-time roles and pre-graduation experiences in software engineering, full-stack or AI — alongside my studies at USI.</p>
+
+    <button class="contact__mail" data-copy="scapellatodavide552@gmail.com" data-cursor="Copy">
+      <span class="contact__big"><span data-i18n="contact.big1">Let's build</span><br><span class="serif italic" data-i18n="contact.big2">something.</span></span>
+      <span class="contact__addr mono">scapellatodavide552@gmail.com <span class="contact__hint" data-i18n="contact.copy">— click to copy</span></span>
+    </button>
+
+    <div class="contact__grid">
+      <div>
+        <span class="mono muted" data-i18n="contact.reach">Reach me</span>
+        <a href="mailto:scapellatodavide552@gmail.com" class="ulink">scapellatodavide552@gmail.com</a>
+        <a href="tel:+393203440031" class="ulink">+39 320 344 0031</a>
+      </div>
+      <div>
+        <span class="mono muted" data-i18n="contact.social">Elsewhere</span>
+        <a href="https://github.com/FullMonkeyy" target="_blank" rel="noopener" class="ulink">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/davide-scapellato-87a742291" target="_blank" rel="noopener" class="ulink">LinkedIn ↗</a>
+      </div>
+      <div>
+        <span class="mono muted" data-i18n="hero.based">Based in</span>
+        <span>Porto Ceresio (VA), IT</span>
+        <span>Lugano, CH</span>
+      </div>
+    </div>
+
+    <div class="contact__bottom mono">
+      <span>© <span class="year">2026</span> Davide Scapellato</span>
+      <span class="clock">--:--:--</span>
+      <a href="#top" class="ulink" data-i18n="contact.top">Back to top ↑</a>
+    </div>
+    <div class="contact__giant serif italic" aria-hidden="true">Scapellato</div>
+  </footer>
+
+  <!-- Command palette -->
+  <div class="palette" role="dialog" aria-modal="true" aria-label="Command menu" hidden>
+    <div class="palette__box">
+      <input class="palette__input" type="text" placeholder="Type a command…" data-i18n-ph="pal.ph" autocomplete="off" spellcheck="false" aria-label="Command">
+      <ul class="palette__list" role="listbox"></ul>
+      <div class="palette__foot mono muted"><span>↑↓ <span data-i18n="pal.nav">navigate</span></span><span>↵ <span data-i18n="pal.run">run</span></span><span>esc</span></div>
+    </div>
+  </div>
+
+  <div class="toast mono" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js" defer></script>
+  <script src="assets/js/i18n.js" defer></script>
+  <script src="assets/js/portrait-data.js" defer></script>
+  <script src="assets/js/scene.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
