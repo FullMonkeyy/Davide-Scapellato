@@ -125,7 +125,7 @@ const scenePromise = (async () => {
     if (!probe.getContext('webgl2') && !probe.getContext('webgl')) throw new Error('no webgl');
     if (!window.THREE || !window.DSScene) throw new Error('three.js not loaded');
     // Data URI: a file:// image would taint the canvas and block pixel sampling.
-    scene = await window.DSScene.createScene(canvas, { portraitUrl: window.DS_PORTRAIT || 'Photo/web/portrait.webp', reducedMotion });
+    scene = await window.DSScene.createScene(canvas, { portraitUrl: window.DS_PORTRAIT || 'Photo/web/davide-scapellato.webp', reducedMotion });
   } catch (err) {
     canvas.remove();
     console.warn('[scene] disabled:', err.message);
