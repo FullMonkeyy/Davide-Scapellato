@@ -86,6 +86,9 @@ const DICT = {
 
     'exp.label': 'Esperienza',
     'exp.title': 'Dove ho <span class="serif italic">lavorato</span>',
+    'exp.promo.date': 'In corso',
+    'exp.promo.role': 'Promoter del Bachelor in Informatica USI',
+    'exp.promo.desc': 'Supporto all\'organizzazione e allo svolgimento degli Open Day (Bachelor Info Days e Ministage) e di altri eventi nel campus.',
     'exp.0.date': 'In corso',
     'exp.0.role': 'Docente di programmazione',
     'exp.0.desc': 'Insegno le basi della programmazione agli studenti dei licei svizzeri, per conto dell\'USI — trasformando le prime righe di codice in un modo di ragionare.',
@@ -204,6 +207,9 @@ const DICT = {
 
     'exp.label': 'Erfahrung',
     'exp.title': 'Wo ich <span class="serif italic">gearbeitet</span> habe',
+    'exp.promo.date': 'Aktuell',
+    'exp.promo.role': 'Promoter für den Bachelor Informatik an der USI',
+    'exp.promo.desc': 'Unterstützung bei der Organisation und Durchführung der Open Days (Bachelor Info Days und Ministage) sowie weiterer Veranstaltungen auf dem Campus.',
     'exp.0.date': 'Aktuell',
     'exp.0.role': 'Programmierdozent',
     'exp.0.desc': 'Ich unterrichte Programmiergrundlagen an Schweizer Gymnasien im Auftrag der USI — damit aus den ersten Codezeilen eine Denkweise wird.',
